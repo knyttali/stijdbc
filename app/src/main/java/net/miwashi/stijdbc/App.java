@@ -21,7 +21,6 @@ public class App {
                 System.out.print(rs.getString(1));
                 System.out.println();
             }
-            con.close();
         } catch (ClassNotFoundException e) {
             System.err.println("Driver for mysql is not in classpath!");
             System.err.println(e);
