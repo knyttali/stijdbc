@@ -3,25 +3,39 @@
  */
 package net.miwashi.stijdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.*;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
+    private static final Logger LOGGER = LoggerFactory.getLogger( App.class );
+    
     public static void main(String[] args) {
+        Connection con = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/stidb", "sti", "sti");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/stidb", "sti", "sti");
+            ResultSet rs = con.createStatement().executeQuery("Show tables");
+            while(rs.next()) {
+                System.out.print(rs.getString(1));
+                System.out.println();
+            }
+            con.close();
         } catch (ClassNotFoundException e) {
             System.err.println("Driver for mysql is not in classpath!");
             System.err.println(e);
         } catch (SQLException e) {
             System.err.println("Exception caught when connection to database!");
             System.err.println(e);
+        } finally {
+            if(con!=null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                    LOGGER.warn("Unable to close connection!", ignore);
+                }
+            }
         }
     }
 }
