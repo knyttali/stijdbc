@@ -3,13 +3,13 @@
  */
 package net.miwashi.stijdbc;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
 public class App {
-    //private static final Logger LOGGER = LoggerFactory.getLogger( App.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( App.class );
 
     public static void main(String[] args) {
         System.out.println("Running");
@@ -25,15 +25,15 @@ public class App {
                 System.out.println();
             }
         } catch (ClassNotFoundException e) {
-            //LOGGER.warn("Driver for mysql is not in classpath!", e);
+            LOGGER.warn("Driver for mysql is not in classpath!", e);
         } catch (SQLException e) {
-            //LOGGER.warn("Exception caught when connection to database!", e);
+            LOGGER.warn("Exception caught when connection to database!", e);
         } finally {
             if(con!=null) {
                 try {
                     con.close();
                 } catch (SQLException ignore) {
-                    //LOGGER.warn("Unable to close connection!", ignore);
+                    LOGGER.warn("Unable to close connection!", ignore);
                 }
             }
         }
