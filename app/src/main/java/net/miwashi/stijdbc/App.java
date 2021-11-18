@@ -19,7 +19,7 @@ public class App {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Chinook", "sti", "sti");
-            ResultSet rs = con.createStatement().executeQuery("select * from Artist");
+            ResultSet rs = con.createStatement().executeQuery("select * from Artist limit 7");
             while(rs.next()) {
                 //System.out.print(rs.getString(1));
                 Integer id = rs.getInt("ArtistId");
