@@ -1,7 +1,5 @@
 package net.miwashi.stijdbc;
 
-import java.util.Set;
-
 public class Artist {
     private Integer id;
     private String name;
