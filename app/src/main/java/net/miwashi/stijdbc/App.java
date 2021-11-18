@@ -18,11 +18,14 @@ public class App {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/stidb", "sti", "sti");
-            ResultSet rs = con.createStatement().executeQuery("Show tables");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Chinook", "sti", "sti");
+            ResultSet rs = con.createStatement().executeQuery("select * from Artist");
             while(rs.next()) {
-                System.out.print(rs.getString(1));
-                System.out.println();
+                //System.out.print(rs.getString(1));
+                Integer id = rs.getInt("ArtistId");
+                String name = rs.getString("Name");
+                Artist artist = new Artist(id, name);
+                System.out.println(artist);
             }
         } catch (ClassNotFoundException e) {
             LOGGER.warn("Driver for mysql is not in classpath!", e);
